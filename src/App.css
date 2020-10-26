@@ -1,0 +1,96 @@
+.App {
+  text-align: center;
+  padding: 20px;
+}
+
+body {
+  background-color: rgb(132, 175, 126);
+}
+
+.title {
+  text-align: center;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 25px;
+}
+
+.tableContainer {
+  display: flex;
+  overflow-x: auto;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: 3px solid rgb(13, 58, 13);
+  padding: 5px;
+}
+
+th {
+  background-color: rgb(179, 218, 167);
+  padding: 6px;
+}
+
+tr:nth-child(even) {
+  background-color: #6ca776;
+}
+
+.filterContainer {
+  display: flex;
+  justify-content: space-between;
+  padding: 40px;
+}
+
+.nameFilter {
+  display: flex;
+  flex-direction: column;
+}
+
+.numericFilters {
+  display: flex;
+  align-items: flex-start;
+  padding: 15px;
+}
+
+.filterButton {
+  background-color: rgb(40, 78, 43);
+  border-radius: 5px;
+  border: none;
+  color: rgb(231, 228, 228);
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 5px;
+  margin: 5px;
+}
+
+input[type='text'],
+input[type='number'] {
+  background-color: rgb(60, 170, 93);
+  border-radius: 7px;
+  border: none;
+  font-size: 15px;
+  font-weight: 700;
+  height: 30px;
+  padding: 0 10px;
+  margin: 5px;
+}
+
+select {
+  background-color: rgb(60, 170, 93);
+  border-radius: 7px;
+  font-size: 15px;
+  font-weight: 700;
+  height: 30px;
+  padding: 0 10px;
+  cursor: pointer;
+  margin: 5px;
+}
+
+input[type='radio']:checked {
+  cursor: pointer;
+  position: relative;
+  background-color: teal;
+}
