@@ -11,7 +11,7 @@ import {
 
 const comparisonOptions = ['maior que', 'menor que', 'igual a'];
 
-const options = [
+const columnOptions = [
   'Coluna',
   'rotation_period',
   'orbital_period',
@@ -28,7 +28,7 @@ class NumericFilters extends Component {
         data-testid="column-filter"
         onChange={(event) => changeColumn(event.target.value)}
       >
-        {options
+        {columnOptions
           .filter((option) => !numericFilters.includes(option))
           .map((option) => (
             <option key={option} value={option}>
