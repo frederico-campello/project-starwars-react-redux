@@ -21,6 +21,7 @@ class SWDatatable extends Component {
     return (
       <div>
         <h1 className="title">StarWars Datatable</h1>
+        {isFetching && <h2>Loading...</h2>}
         {!isFetching && (
           <div className="filterContainer">
             <NameFilter />
@@ -29,7 +30,6 @@ class SWDatatable extends Component {
             <SortFilters />
           </div>
         )}
-        {isFetching && <h2>Loading...</h2>}
         {arrayPlanets.length > 0 && <Table />}
       </div>
     );

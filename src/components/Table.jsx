@@ -2,61 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-const filterData = (datatable, name, numericFilters) => {
-  let filteredData = [];
-  if (name === '') filteredData = datatable;
-  if (name !== '') {
-    filteredData = datatable.filter((planet) => planet.name.includes(name));
-  }
-  if (numericFilters.length > 0) {
-    numericFilters.forEach((filter) => {
-      if (filter.comparison === 'maior que') {
-        filteredData = filteredData.filter(
-          (planet) => planet[filter.column] > Number(filter.value),
-        );
-      }
-      if (filter.comparison === 'menor que') {
-        filteredData = filteredData.filter(
-          (planet) => planet[filter.column] < Number(filter.value),
-        );
-      }
-      if (filter.comparison === 'igual a') {
-        filteredData = filteredData.filter(
-          (planet) => planet[filter.column] === filter.value,
-        );
-      }
-    });
-  }
-  return filteredData;
-};
+import { filterData, orderAscDesc } from '../services/filterAndOrder';
 
-const numericKeys = [
-  'rotation_period',
-  'orbital_period',
-  'diameter',
-  'surface_water',
-  'population',
-];
-
-const ascSortNumber = (filtered, column) =>
-  filtered.sort((a, b) => Number(a[column]) - Number(b[column]));
-
-const ascSortString = (filtered, column) =>
-  filtered.sort((a, b) => {
-    if (a[column] > b[column]) return 1;
-    if (a[column] < b[column]) return -1;
-    return 0;
-  });
-
-const orderAscDesc = (filtered, column, sort) => {
-  const sorted = numericKeys.includes(column)
-    ? ascSortNumber(filtered, column)
-    : ascSortString(filtered, column);
-  return sort === 'DESC' ? sorted.reverse() : sorted;
-};
-
-const Table = ({ data, name, numericFilters, column, sort }) => {
-  const filtered = filterData(data, name, numericFilters);
+const Table = ({ data, nameInput, numericFilters, column, sort }) => {
+  const filtered = filterData(data, nameInput, numericFilters);
   const ordered = orderAscDesc(filtered, column, sort);
 
   return (
@@ -87,14 +36,14 @@ const Table = ({ data, name, numericFilters, column, sort }) => {
 
 const mapStateToProps = (state) => ({
   data: state.starWarsAPIReducer.data,
-  name: state.filters.filterByName.name,
+  nameInput: state.filters.filterByName.name,
   numericFilters: state.filters.filterByNumericValues,
   column: state.filters.order.column.toLowerCase(),
   sort: state.filters.order.sort,
 });
 
 Table.propTypes = {
-  name: PropTypes.string.isRequired,
+  nameInput: PropTypes.string.isRequired,
   data: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string,
